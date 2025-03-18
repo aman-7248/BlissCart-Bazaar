@@ -1,11 +1,24 @@
 import express from 'express';
+import colors from 'colors'
 import dotenv from 'dotenv';
+import morgan from 'morgan'
+import connectDB from './config/db.js';
+//jab require use karte toh file ka extension nahi dete the but ab es6 me file ka extension bhi dena padta hai
+
 
 //configure env
 dotenv.config(); // we give path where .env file is located since in our case it is in root directory no need to give
                 // syntax ->  dotenv.config({path:'\ff'});
 
+
+connectDB();
+
+//rest object
 const app=express();
+
+//middlewares
+app.use(express.json()); //to send and receive data in json format
+app.use(morgan('dev'));  //console me print karne ke liye jab bhi req ya response ho
 
 const PORT=process.env.PORT || 8080;
 
@@ -15,5 +28,5 @@ app.get("/",(req,res)=>{
 });
 
 app.listen(PORT,()=>{
-    console.log(`Server listening on ${process.env.DEV_MODE} -- PORT ${PORT}`);
+    console.log(`Server listening on ${process.env.DEV_MODE} -- PORT ${PORT}`.yellow);
 })
