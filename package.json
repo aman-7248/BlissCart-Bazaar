@@ -1,0 +1,21 @@
+{
+  "name": "blisscart-bazaar",
+  "version": "1.0.0",
+  "description": "BlissCart Bazaar is an E-Commerce shopping platform designed to facilitate smooth buying and selling of products.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.9"
+  }
+}
