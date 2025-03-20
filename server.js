@@ -22,7 +22,7 @@ app.use(morgan('dev'));  //console me print karne ke liye jab bhi req ya respons
 
 //routes
 app.use('/api/v1/auth',authRoutes);
-
+// Iska matlab hai /api/v1/auth se start hone wale saare requests (like /api/v1/auth/login, /api/v1/auth/register) ko authRoutes handle karega.
 
 
 
