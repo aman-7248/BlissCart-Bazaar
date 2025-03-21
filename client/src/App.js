@@ -5,6 +5,9 @@ import Contact from  "./pages/Contact"
 import Policy from  "./pages/Policy"
 import Pagenotfound from  "./pages/Pagenotfound"
 
+//helmet is used for Search engine optimaztion (SEO)
+
+
 //app component me routes likhte hai
 function App() {
   return (

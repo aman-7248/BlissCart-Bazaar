@@ -14,15 +14,14 @@ const Layout = ({ children, title, description, keywords, author }) => {
         <meta name="keywords" content={keywords} />
         <meta name="author" content={author} />
         <title>{title}</title>
-
       </Helmet>
       <Header />
-      <main style={{ minHeight: "76vh" }}>{children}</main>
+      <main style={{ minHeight: "80vh" }}>{children}</main>
       <Footer />
     </>
   );
 };
-
+//default props for Layout
 Layout.defaultProps={
   title: "BlissCart Bazaar - Shop Now for the Best Deals",
   description: "BlissCart Bazaar offers the latest fashion, electronics, and home essentials at unbeatable prices. Enjoy fast delivery and secure payments.",

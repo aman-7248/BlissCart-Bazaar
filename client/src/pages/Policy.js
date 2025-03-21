@@ -2,9 +2,10 @@ import React from "react";
 import Layout from "./../components/Layout/Layout";
 
 const Policy = () => {
+  //in Layout component Parameter is explicitly passed by us 
   return (
     <Layout
-      title="Privacy Policy, Returns & Terms | BlissCart Bazaar"
+      title="Privacy Policy | BlissCart Bazaar"
       description="Learn about BlissCart Bazaar's privacy policy, return and refund policy, and terms of service. Shop with confidence knowing your data is secure, and returns are hassle-free."
       keywords="privacy policy, return policy, refund policy, terms of service, ecommerce policies"
       author="BlissCart Team"

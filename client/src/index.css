@@ -51,7 +51,7 @@
 }
 
 /*======== page not found css ======= */
-.pnf {
+.pnf {                  
   display: flex;
   min-height: 65vh;
   flex-direction: column;
