@@ -3,7 +3,12 @@ import Layout from "./../components/Layout/Layout";
 
 const About = () => {
   return (
-    <Layout>
+    <Layout
+      title="About Us - BlissCart Bazaar"
+      description="Learn more about BlissCart Bazaar — your one-stop destination for quality products, unbeatable deals, and an exceptional online shopping experience."
+      keywords="about BlissCart, online shopping, best deals, quality products, ecommerce"
+      author="BlissCart Team"
+    >
       <div className="row contactus ">
         <div className="col-md-6 ">
           <img

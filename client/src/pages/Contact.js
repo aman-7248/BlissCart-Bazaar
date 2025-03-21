@@ -3,7 +3,12 @@ import Layout from "./../components/Layout/Layout";
 import { BiMailSend, BiPhoneCall, BiSupport } from "react-icons/bi";
 const Contact = () => {
   return (
-    <Layout>
+    <Layout
+      title="Contact Us - BlissCart Bazaar"
+      description="Get in touch with BlissCart Bazaar for queries, support, or product information. We’re here for you 24/7 — call, email, or chat with us."
+      keywords="contact BlissCart, customer support, ecommerce help, 24/7 support"
+      author="BlissCart Support Team"
+    >
       <div className="row contactus ">
         <div className="col-md-6 ">
           <img
