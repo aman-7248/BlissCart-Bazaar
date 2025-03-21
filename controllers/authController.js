@@ -1,6 +1,7 @@
 import { hashPassword ,comparePassword} from "../helpers/authHelper.js";
 import userModel from "../models/userModel.js"
 import JWT from "jsonwebtoken";
+//controllers functions me jo bhi function help kar rahe hai woh helper folder me likhe hai
 export const registerController=async (req,res)=>{
     try{
         const {name,email,password,phone,address}=req.body
@@ -52,39 +53,45 @@ export const registerController=async (req,res)=>{
 };
 
 
-export const loginController = async(req,res)=>{
+
+//callback function hai :::it will always have req and res
+export const loginController = async (req,res)=>{
     try{
         const {email,password}=req.body;
         if(!email  || !password){
             return res.status(404).send({
                 success:false,
-                massage:"Invalid email or password"
+                message:"Invalid email or password"
             });
         }
 
-        // checking existing user or not
+        // checking user exists or not
         const user= await userModel.findOne({email})
         if(!user){
-            return res.status(404).send({
+            return res.status(404).send({         //agar return nahi karoge toh further code execute hota rahega 
                 success:false,
-                massage:"Email not registered"
+                message:"Email not registered"
             });
         }
 
         const match= await comparePassword(password,user.password)
         if(!match){
-            return res.status(200).send({
+            return res.status(200).send({     
                 success:false,
-                massage:"Invalid Password"
+                message:"Invalid Password"
             });
         }
 
+        //jab password and email sab match ho jaye
+
+
         // token creation
+        //jwt syntax -->  jwt.sign(kis basis pe ,secret key ,days after whick token expire) 
         const token= await JWT.sign({_id:user._id},process.env.JWT_SECRET,{expiresIn:'7d'});
         return res.status(200).send({
             success:true,
-            massage:"login successfully",
-            user:{
+            message:"login successfully",
+            user:{                         //ye isliye bheja hai kyuki frontend me user ki details show karni hai
                 name:user.name,
                 email:user.email,
                 phone:user.phone,
@@ -92,11 +99,11 @@ export const loginController = async(req,res)=>{
             },
             token
         });
-    }catch(error){
+    } catch(error){
         console.log(error);
         res.status(500).send({
             success:false,
-            massage:"Error in login",
+            message:"Error in login",
             error
         })
     }

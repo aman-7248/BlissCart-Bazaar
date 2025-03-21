@@ -10,6 +10,7 @@ router.post('/register',registerController);
 // Jab POST request aaye /register route pe, toh registerController function run hoga
 
 router.post('/login', loginController);
+             
+router.get('/test', requireSignin,isAdmin,testController); //authentication  authorisation
 
-router.get('/test', requireSignin,isAdmin,testController);
 export default router;

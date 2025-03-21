@@ -1,6 +1,11 @@
 import React from "react";
 import { NavLink,Link } from "react-router-dom";
 import { GiShoppingBag } from "react-icons/gi";
+
+//🟢 Use <Link> when you simply want to navigate without styling changes.
+//🔴 Use <NavLink> when you need to highlight the currently active page.
+//✅ <NavLink> is best for navigation bars where users need to see which page they are on.
+
 const Header = () => {
   return (
     <>
@@ -18,8 +23,8 @@ const Header = () => {
             <span className="navbar-toggler-icon" />
           </button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <Link to="/" className="navbar-brand" >
-              <GiShoppingBag/>Ecommerce App
+          <Link to="/" className="navbar-brand">
+              <GiShoppingBag/> Blisscart Bazzar
             </Link>
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">

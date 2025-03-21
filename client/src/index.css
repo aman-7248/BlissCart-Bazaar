@@ -23,29 +23,30 @@
 }
 
 .nav-link{
-  font-weight: 300;
+  font-weight: 300 important;
 }
 
 .navbar-brand{
   font-weight: 700;
   font-family: "Roboto", sans-serif;
   letter-spacing: 1px;
+  /* color:red; */
 }
 
 .footer{
-  color:black;
+  color:white;
   padding: 25px;
-  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+  /* background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%); */
+  background-color:black;
 }
-
 .footer a{
   text-decoration: none;
-  color: black;
+  color:white;
   padding:10px;
 }
 
 .footer a:hover{
-  color:grey;
+  color:orange;
   border-bottom: 2px solid black;
 }
 
