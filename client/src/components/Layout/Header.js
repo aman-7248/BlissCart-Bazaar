@@ -1,12 +1,24 @@
 import React from "react";
-import { NavLink,Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
+import { useAuth } from "../../context/auth";
 import { GiShoppingBag } from "react-icons/gi";
+import toast from "react-hot-toast";
 
 //🟢 Use <Link> when you simply want to navigate without styling changes.
 //🔴 Use <NavLink> when you need to highlight the currently active page.
 //✅ <NavLink> is best for navigation bars where users need to see which page they are on.
 
 const Header = () => {
+  const [auth, setAuth] = useAuth();
+  const handleLogout = () => {
+    setAuth({         // once you loged out then user ki info remove karo from global auth context
+      ...auth,
+      user: null,
+      token: "",
+    });
+    localStorage.removeItem("auth");   // remove the data from local storage also
+    toast.success("Logout Successfully");
+  };
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -23,32 +35,48 @@ const Header = () => {
             <span className="navbar-toggler-icon" />
           </button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-          <Link to="/" className="navbar-brand">
-              <GiShoppingBag/> Blisscart Bazaar
+            <Link to="/" className="navbar-brand">
+              <GiShoppingBag /> Blisscart Bazaar
             </Link>
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <NavLink to="/" className="nav-link "  >
+                <NavLink to="/" className="nav-link ">
                   Home
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/category" className="nav-link " >
+                <NavLink to="/category" className="nav-link ">
                   Category
                 </NavLink>
               </li>
+              {!auth.user ? ( // if user nahi login hai toh register/login button navbar(header) mai dikhenge, otherwise logout button dikhega
+                <>
+                  <li className="nav-item">
+                    <NavLink to="/register" className="nav-link">
+                      Register
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink to="/login" className="nav-link">
+                      Login
+                    </NavLink>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="nav-item">
+                    <NavLink
+                      onClick={handleLogout}
+                      to="/login"
+                      className="nav-link"
+                    >
+                      Logout
+                    </NavLink>
+                  </li>
+                </>
+              )}
               <li className="nav-item">
-                <NavLink to="/register" className="nav-link" >
-                  Register
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink to="/login" className="nav-link" >
-                  Login
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink to="/cart" className="nav-link" >
+                <NavLink to="/cart" className="nav-link">
                   Cart(0)
                 </NavLink>
               </li>
@@ -56,7 +84,6 @@ const Header = () => {
           </div>
         </div>
       </nav>
-
     </>
   );
 };
