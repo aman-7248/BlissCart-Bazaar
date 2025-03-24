@@ -5,7 +5,7 @@ import Contact from "./pages/Contact";
 import Policy from "./pages/Policy";
 import Pagenotfound from "./pages/Pagenotfound";
 import Register from "./pages/Auth/Register";
-import { ToastContainer } from "react-toastify";
+// import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/Auth/Login";
 import Dashboard from "./pages/user/Dashboard";
@@ -23,7 +23,6 @@ function App() {
           {/*when you navigate to dashboard pahle privateroute check honge then dashboard pe navigate hoga */}
           <Route path="" element={<Dashboard />} />
         </Route>
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/about" element={<About />} />

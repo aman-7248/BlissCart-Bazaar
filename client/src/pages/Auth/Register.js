@@ -22,6 +22,10 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault(); // on submit prevent default behaviour of page refresh by javascript
     try {
+      //axios ki help se frontend and backend baat karte hai(put,post,patch,get..)
+      //Axios is a JavaScript library used to make HTTP requests from a web browser or Node.js. 
+      // It simplifies fetching data from APIs, sending data, and handling responses.
+      //res==response comes from backend
       const res = await axios.post(`/api/v1/auth/register`, {
         name,
         email,
@@ -29,6 +33,7 @@ const Register = () => {
         phone,
         address,
       });
+      //jo res hum register ke time bhejege wahi recieve hoga
       if (res && res.data.success) {
         toast.success(res.data && res.data.message);
         navigate("/login"); // when successfully registered navigate to login page
@@ -42,9 +47,9 @@ const Register = () => {
   };
 
   return (
-   <Layout title="Register - Ecommer App">
+   <Layout title="Register | BlissCartBazaar">
          <div className="form-container" style={{ minHeight: "90vh" }}>
-           <form onSubmit={handleSubmit}>
+           <form onSubmit={handleSubmit}>  {/*jaise hi hum submit karenge handleSubmit function call hoga*/}
              <h4 className="title">REGISTER FORM</h4>
              <div className="mb-3">
             <input
@@ -54,14 +59,17 @@ const Register = () => {
               className="form-control"
               id="exampleInputEmail1"
               placeholder="Enter Your Name"
-              required
+              required   //for client side validation
               autoFocus
             />
           </div>
           <div className="mb-3">
             <input
               type="email"
+              //we have added two values ie. value and on change
+              //value=email and email changes by usestate(setter function) setemail 
               value={email}
+              //on change ->> me humko event milta hai and event ki help se hum value change karte hai
               onChange={(e) => setEmail(e.target.value)}
               className="form-control"
               id="exampleInputEmail1"
@@ -87,7 +95,7 @@ const Register = () => {
               onChange={(e) => setPhone(e.target.value)}
               className="form-control"
               id="exampleInputEmail1"
-              placeholder="Enter Your Phone.No"
+              placeholder="Enter Your Phone Number"
               required
             />
           </div>

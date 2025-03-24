@@ -35,7 +35,7 @@ const Login = () => {
           token: res.data.token,
         });
         localStorage.setItem("auth", JSON.stringify(res.data)); // store data in local storage
-        navigate(location.state || "/"); // when successfully loged in navigate to home page
+        navigate(location.state || "/"); // when successfully logged in navigate to home page
       } else {
         toast.error(res.data.message);
       }
@@ -46,7 +46,7 @@ const Login = () => {
   };
 
   return (
-    <Layout title="Register - Ecommer App">
+    <Layout title="Login | BlissCartBazaar">
       <div className="form-container" style={{ minHeight: "90vh" }}>
         <form onSubmit={handleSubmit}>
           <h4 className="title">LOGIN FORM</h4>

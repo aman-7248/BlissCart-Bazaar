@@ -7,10 +7,15 @@ const Spinner = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCount((prevValue) => --prevValue);
-    }, 1000);
-    count === 0 &&
+    //useEffect ke andar kayi sare functions likh sakte hai
+    //✔ setInterval → Runs a function at fixed time intervals.
+    //✔ clearInterval(intervalId) → Stops the interval when no longer needed.
+    // syntax --> let intervalId = setInterval(function, delay, param1, param2, ...);
+
+    const interval = setInterval(() => {setCount((prevValue) => --prevValue)}, 1000);       //1000 == 1sec
+
+    //agar count==0 hogya tabhi and ke aage ki condition execute hogi
+    count === 0 &&  
       navigate("/login", {
         state: location.pathname,
       });
@@ -19,10 +24,11 @@ const Spinner = () => {
   return (
     <>
       <div
-        className="d-flex justify-content-center align-items-center"
-        style={{ height: "100vh" }}
+        className="d-flex flex-column  justify-content-center align-items-center"
+        style={{ height: "100vh", gap: "20px" , color:"green"}}
+
       >
-        <h1 className="Text-center">redirecting to you in {count} seconds</h1>
+        <h1 className="Text-center">Redirecting you to login page in {count} seconds</h1>
         <div className="spinner-border" role="status">
           <span className="visually-hidden">Loading...</span>
         </div>

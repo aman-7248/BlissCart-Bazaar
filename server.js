@@ -17,6 +17,7 @@ const app = express();
 
 //middlewares
 app.use(cors());  // we use to intigrate frontend and backend ports(becuase backend-8080, frontend-3000)
+                  //so that no error occurs
 app.use(express.json()); //to send and receive data in json format
 app.use(morgan("dev")); //console me print karne ke liye jab bhi req ya response ho
 

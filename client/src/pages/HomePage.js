@@ -12,6 +12,7 @@ const HomePage = () => {
       author="BlissCart Team"
     >
       <h1>Home Page </h1>
+      {/*JSON.stringify(value, replacer, space) */}
       <pre>{JSON.stringify(auth,null,4)}</pre>
     </Layout>
   );
