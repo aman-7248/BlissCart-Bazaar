@@ -3,6 +3,7 @@ import {
   registerController,
   loginController,
   testController,
+  forgotPasswordController,
 } from "../controllers/authController.js";
 import { requireSignin, isAdmin } from "../middlewares/authMiddleware.js";
 
@@ -14,6 +15,8 @@ router.post("/register", registerController);
 // Jab POST request aaye /register route pe, toh registerController function run hoga
 
 router.post("/login", loginController);
+
+router.post("/forgot-password",forgotPasswordController)
 
 router.get("/test", requireSignin, isAdmin, testController); //authentication  authorisation
 

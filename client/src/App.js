@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/Auth/Login";
 import Dashboard from "./pages/user/Dashboard";
 import PrivateRoute from "./components/Layout/Routes/Private";
+import ForgotPasword from "./pages/Auth/ForgotPasword";
 
 //helmet is used for Search engine optimaztion (SEO)
 
@@ -25,6 +26,7 @@ function App() {
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPasword/>}/>
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/policy" element={<Policy />} />
