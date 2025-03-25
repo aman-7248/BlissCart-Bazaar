@@ -5,7 +5,7 @@ import Layout from '../../components/Layout/Layout'
 const Dashboard = () => {
   return (
     <Layout title={"Dashboard | BlissCartBazaar"}>
-        <h1>Dashboard</h1>
+        <h1>User Dashboard</h1>
     </Layout>
     
   )

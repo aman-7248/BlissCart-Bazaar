@@ -27,4 +27,11 @@ router.get("/user-auth", requireSignin, (req, res) => {  // Call /user-auth from
   res.status(200).send({ ok: true });
 });
 
+ 
+//protected Admin route
+                        //checks token //check role
+router.get("/admin-auth", requireSignin,isAdmin,(req, res) => {
+  res.status(200).send({ ok: true });
+});
+
 export default router;

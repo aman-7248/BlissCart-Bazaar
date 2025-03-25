@@ -21,6 +21,10 @@ const userSchema=new mongoose.Schema({
         minlength: 6, // Ensures a minimum password length
         // select: false ---> Excludes password from queries by default
     },
+    phone:{
+        type:Number,
+        required:true
+    },
     address:{
         type:String,
         required:true

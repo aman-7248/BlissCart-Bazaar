@@ -11,6 +11,8 @@ import Login from "./pages/Auth/Login";
 import Dashboard from "./pages/user/Dashboard";
 import PrivateRoute from "./components/Layout/Routes/Private";
 import ForgotPasword from "./pages/Auth/ForgotPasword";
+import AdminRoute from "./components/Layout/Routes/AdminRoute";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
 
 //helmet is used for Search engine optimaztion (SEO)
 
@@ -20,10 +22,13 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        {/*when you navigate to dashboard pahle privateroute check honge then dashboard pe navigate hoga */}
         <Route path="/dashboard" element={<PrivateRoute />}>
-          {/*when you navigate to dashboard pahle privateroute check honge then dashboard pe navigate hoga */}
-          <Route path="" element={<Dashboard />} />
+            <Route path="user" element={<Dashboard />} />
         </Route>
+         <Route path="/dashboard" element={<AdminRoute/>}> 
+              <Route path="admin" element={<AdminDashboard/>} />
+         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPasword/>}/>

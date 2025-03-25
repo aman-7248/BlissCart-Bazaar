@@ -102,10 +102,12 @@ export const loginController = async (req, res) => {
       message: "login successfully",
       user: {
         //ye isliye bheja hai kyuki frontend me user ki details show karni hai
+        _id:user._id,
         name: user.name,
         email: user.email,
         phone: user.phone,
         address: user.address,
+        role:user.role,
       },
       token,
     });
