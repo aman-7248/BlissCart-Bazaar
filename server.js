@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoute.js";
+import categoryRoutes from './routes/categoryRoutes.js';
+import productRoutes from './routes/productRoutes.js' 
 import cors from "cors";
 
 //jab require use karte toh file ka extension nahi dete the but ab es6 me file ka extension bhi dena padta hai
@@ -23,6 +25,8 @@ app.use(morgan("dev")); //console me print karne ke liye jab bhi req ya response
 
 //routes
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/category",categoryRoutes);
+app.use('/api/v1/product',productRoutes)
 // Iska matlab hai /api/v1/auth se start hone wale saare requests
 // (like /api/v1/auth/login, /api/v1/auth/register) ko authRoutes handle karega.
 

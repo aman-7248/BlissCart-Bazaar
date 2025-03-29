@@ -2,7 +2,7 @@ import JWT from "jsonwebtoken"
 import userModel from "../models/userModel.js";
 
 // routes token based                  
-export const requireSignin = async (req,res,next) => {   //middleware me 3 parameter hote hai (req,res,next)
+export const requireSignIn = async (req,res,next) => {   //middleware me 3 parameter hote hai (req,res,next)
     try{
         //basically login ke time pe jo token bheja tha woh (req.header.autorisation me save hau hai)
         //JWT verification syntax   --->>  jwt.verify(token,secret key) 
