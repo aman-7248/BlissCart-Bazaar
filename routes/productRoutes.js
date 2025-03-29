@@ -21,6 +21,6 @@ router.get('/get-product/:slug',getSingleProductController);
 router.get('/product-photo/:pid',productPhotoController);
 
 //delete prodoct
-router.delete('/delete-product/:pid',deleteProductController);
+router.delete('/delete-product/:pid',requireSignIn,isAdmin,deleteProductController);
 
 export default router;
