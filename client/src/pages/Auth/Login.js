@@ -74,8 +74,8 @@ const Login = () => {
           </div>
           <div className="mb-3">
             <button
-              type="submit"
-              className="btn btn-primary"
+              type="button"
+              className="btn btn-secondary"
               onClick={() => navigate(`/forgot-password`)}
             >
               FORGOT PASSWORD

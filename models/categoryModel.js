@@ -5,7 +5,7 @@ const categorySchema= new mongoose.Schema({
         required:true,
         unique:true
     },
-    slug:{
+    slug:{            // for better seo, we make url redable and cleaner with it
         type:String,
         lowercase:true,
     },   
