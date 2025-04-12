@@ -143,7 +143,7 @@ export const forgotPasswordController=async (req,res)=>{
         message:"Wrong Data Entered"
       })
     }
-    // if user is found then we have to update
+    // if user is found then we have to update password
 
     const hashed=await hashPassword(newPassword);
     await userModel.findByIdAndUpdate(user._id,{password:hashed});
