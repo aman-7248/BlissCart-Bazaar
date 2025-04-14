@@ -1,7 +1,8 @@
 import slugify from "slugify";
 import productModel from "../models/productModel.js";
 import fs from "fs";
-
+//formidable ek Node.js module hai jo file uploads aur form data ko easily handle karne ke kaam aata hai, 
+// especially when you are not using multer or some other middleware.
 export const createProductController = async (req, res) => {
   try {
     const { name, slug, description, price, category, quantity, shipping } =

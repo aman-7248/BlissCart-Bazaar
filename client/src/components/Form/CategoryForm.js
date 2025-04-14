@@ -4,7 +4,7 @@ const CategoryForm = ({ handleSubmit, value, setValue }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
+        <div className="form-group" >
           <input
             type="text"
             className="form-control"
@@ -13,8 +13,7 @@ const CategoryForm = ({ handleSubmit, value, setValue }) => {
             onChange={(e) => setValue(e.target.value)}
           />
         </div>
-
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary"  style={{ margin:'8px 0px 0px 0px'}}>
           Submit
         </button>
       </form>

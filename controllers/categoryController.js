@@ -4,11 +4,11 @@ export const createCategoryController=async(req,res)=>{
     try{
         const {name}=req.body
         if(!name){
-            return resizeBy.status(401).send({message:"Name is required"})            
+            return res.status(401).send({message:"Name is required"})            
         }
         const existingCategory=await categoryModel.findOne({name})
         if(existingCategory){
-            return resizeBy.status(200).send({
+            return res.status(200).send({
                 success:true,
                 message:"Category Already Exists"
             })
@@ -21,7 +21,7 @@ export const createCategoryController=async(req,res)=>{
         })
     }catch(error){
         console.log(error)
-        resizeBy.status(500).send({
+        res.status(500).send({
             success:false,
             error,
             message:"Error in Category"
@@ -35,6 +35,7 @@ export const updateCategoryController=async(req,res)=>{
     try{
         const {name}=req.body
         const {id}=req.params
+                                        //update ke 3rd parameter milta hai isko isko true karna padta hai
         const category= await categoryModel.findByIdAndUpdate(id,{name,slug:slugify(name)},{new:true})
         res.status(200).send({
             success:true,

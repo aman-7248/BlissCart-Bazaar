@@ -102,11 +102,14 @@ const CreateProduct = () => {
                   />
                 </label>
               </div>
+              {/*pre-viewing image*/}
               <div className="mb-3">
                 {photo && (
                   <div className="text-center">
                     <img
-                      src={URL.createObjectURL(photo)} // ham browser ki url property ka use karke image url get karke, img ko show kara rahe hai
+                      src={URL.createObjectURL(photo)} 
+                      // ham browser ki url property ka use karke image url get karke, 
+                      // img ko show kara rahe hai
                       alt="product-photo"
                       height={"200px"}
                       className="img img-responsive"

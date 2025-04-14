@@ -6,7 +6,7 @@ import axios from "axios/unsafe/axios.js";
 import CategoryForm from "../../components/Form/CategoryForm";
 import { Modal } from "antd";
 const CreateCategory = () => {
-  const [categories, setCategories] = useState([]); // becuse there will be multiple values, that is an empty array
+  const [categories, setCategories] = useState([]); // becuse there will be multiple values,that is an empty array
   const [name, setName] = useState("");
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState(null);

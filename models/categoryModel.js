@@ -10,5 +10,5 @@ const categorySchema= new mongoose.Schema({
         lowercase:true,
     },   
 });
-
+                            //collection name //schema name
 export default mongoose.model("Category",categorySchema);

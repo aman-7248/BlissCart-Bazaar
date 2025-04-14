@@ -17,9 +17,13 @@ const productSchema= new mongoose.Schema({
         type:Number,
         required:true
     },
-    category:{
+    category:{                              //relationship btw models
         type:mongoose.ObjectId,
         ref:'Category',
+        required:true
+    },
+    quantity:{
+        type:Number,
         required:true
     },
     photo:{
