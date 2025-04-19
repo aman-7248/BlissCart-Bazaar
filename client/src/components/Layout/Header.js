@@ -3,6 +3,8 @@ import { NavLink, Link } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import { GiShoppingBag } from "react-icons/gi";
 import toast from "react-hot-toast";
+import SearchInput from "../Form/SearchInput";
+import useCategory from "../../hooks/useCategory";
 
 //🟢 Use <Link> when you simply want to navigate without styling changes.
 //🔴 Use <NavLink> when you need to highlight the currently active page.
@@ -10,6 +12,7 @@ import toast from "react-hot-toast";
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
+  const categories = useCategory()
   const handleLogout = () => {
     setAuth({
       // once you loged out then user ki info remove karo from global auth context
@@ -40,16 +43,39 @@ const Header = () => {
               <GiShoppingBag /> Blisscart Bazaar
             </Link>
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+              <SearchInput />
               <li className="nav-item">
                 <NavLink to="/" className="nav-link ">
                   Home
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink to="/category" className="nav-link ">
-                  Category
-                </NavLink>
+
+              <li className="nav-item dropdown">
+                <Link
+                  className="nav-link dropdown-toggle"
+                  to={"/categories"}
+                  data-bs-toggle="dropdown"
+                >
+                  Categories
+                </Link>
+                {categories?.map(c => (
+                  <ul className="dropdown-menu">
+                    <li>
+                      <Link className="dropdown-item" to={"/categories"}>
+                        All Categories
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to={`/category/${c.slug}`}>
+                        {c.name}
+                      </Link>
+
+                    </li>
+                  </ul>
+                ))}
+
               </li>
+
               {!auth.user ? ( // if user nahi login hai toh register/login button navbar(header) mai dikhenge, otherwise logout button dikhega
                 <>
                   <li className="nav-item">
@@ -77,7 +103,7 @@ const Header = () => {
                     </NavLink>
                     <ul className="dropdown-menu">
                       <li>
-                        <NavLink to={`/dashboard/${auth?.user?.role===1?"admin":"user"}`} className="dropdown-item">
+                        <NavLink to={`/dashboard/${auth?.user?.role === 1 ? "admin" : "user"}`} className="dropdown-item">
                           Dashboard
                         </NavLink>
                       </li>
