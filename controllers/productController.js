@@ -263,7 +263,7 @@ export const searchProductController = async (req, res) => {
     const { keyword } = req.params
     const results = await productModel.find({
       $or: [
-        { name: { $regex: keyword, $options: "i" } },
+        { name: { $regex: keyword, $options: "i" } },  //options is written to make case insensitive
         { description: { $regex: keyword, $options: "i" } },
       ]
     }).select("-photo")
@@ -281,7 +281,7 @@ export const searchProductController = async (req, res) => {
 //similar products
 export const relatedProductController = async (req, res) => {
   try {
-    const [pid, cid] = req.params
+    const {pid, cid} = req.params
     const products = await productModel.find({
       category: cid,
       _id: { $ne: pid }

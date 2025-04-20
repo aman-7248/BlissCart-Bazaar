@@ -10,12 +10,14 @@ const ProductDetails = () => {
 
     //initial product deatils
     useEffect(()=>{
-        if(params?.slug) getProduct()
+        if(params?.slug) {
+          getProduct()
+        }
     },[params?.slug])
     //get product
     const getProduct = async () => {
         try {
-            const { data } = await axios.get(`/api/v1/product/get-product/${params.slug}`)
+            const { data } = await axios.get(`/api/v1/product/get-product/${params.slug}`);
             setProduct(data?.product);
             getSimilarProduct(data?.product._id,data?.product.category._id);
         } catch (error) {
@@ -24,7 +26,7 @@ const ProductDetails = () => {
     }
 
       // get similar products
-      const getSimilarProduct=async(pid,cid)=>{
+      const getSimilarProduct=async (pid,cid)=>{
         try{
             const {data}=await axios.get(
                 `/api/v1/product/related-product/${pid}/${cid}`
@@ -59,12 +61,14 @@ const ProductDetails = () => {
                 <h6>Description:{product.description}</h6>
                 <h6>Price:{product.price}</h6>
                 <h6>Category:{product.category?.name}</h6>
+                <br></br>
                 <button class="btn btn-secondary ms-1 ">ADD TO CART</button>
             </div>
           </div>
           <hr/>
           <div className="row-container">
           <h6>Similar Products</h6>
+          {/* {JSON.stringify(relatedProducts,null,4)}; */}
           {relatedProducts.length<1 && <p className="text-center">No Similar Products Found</p>}
           <div className="d-flex flex-wrap">
             {relatedProducts?.map((p) => (

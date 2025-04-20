@@ -117,7 +117,7 @@ const HomePage = () => {
       author="BlissCart Team"
     >
       <div className="row mt-3 ms-1">
-        <div className="col-md-3 mt-3">
+        <div className="col-md-3 mt-3" style={{ width: "20.8333%" }}>
           <h4 className="text-center">Filter by Category</h4>
           <div className="d-flex flex-column">
             {categories?.map((c) => (
@@ -155,7 +155,7 @@ const HomePage = () => {
 
 
 
-        <div className="col-md-9">
+        <div className="col-md-9 " style={{marginLeft : "10px"}}>
           <h1 className="text-center">All Products</h1>
           <div className="d-flex flex-wrap">
             {products?.map((p) => (

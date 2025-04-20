@@ -58,24 +58,24 @@ const Header = () => {
                 >
                   Categories
                 </Link>
-                {categories?.map(c => (
-                  <ul className="dropdown-menu">
-                    <li>
-                      <Link className="dropdown-item" to={"/categories"}>
-                        All Categories
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to={`/category/${c.slug}`}>
+                <ul className="dropdown-menu">
+                  <li>
+                    <Link className="dropdown-item" to="/categories">
+                      All Categories
+                    </Link>
+                  </li>
+                  {categories?.map((c) => (
+                    <li key={c.slug}>
+                      <Link
+                        className="dropdown-item"
+                        to={`/category/${c.slug}`}
+                      >
                         {c.name}
                       </Link>
-
                     </li>
-                  </ul>
-                ))}
-
+                  ))}
+                </ul>
               </li>
-
               {!auth.user ? ( // if user nahi login hai toh register/login button navbar(header) mai dikhenge, otherwise logout button dikhega
                 <>
                   <li className="nav-item">
@@ -103,12 +103,21 @@ const Header = () => {
                     </NavLink>
                     <ul className="dropdown-menu">
                       <li>
-                        <NavLink to={`/dashboard/${auth?.user?.role === 1 ? "admin" : "user"}`} className="dropdown-item">
+                        <NavLink
+                          to={`/dashboard/${
+                            auth?.user?.role === 1 ? "admin" : "user"
+                          }`}
+                          className="dropdown-item"
+                        >
                           Dashboard
                         </NavLink>
                       </li>
                       <li>
-                        <NavLink onClick={handleLogout} to="/login" className="dropdown-item">
+                        <NavLink
+                          onClick={handleLogout}
+                          to="/login"
+                          className="dropdown-item"
+                        >
                           Logout
                         </NavLink>
                       </li>
