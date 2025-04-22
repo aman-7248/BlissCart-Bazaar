@@ -1,16 +1,18 @@
-import React from "react";
+import React, { use } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import { GiShoppingBag } from "react-icons/gi";
 import toast from "react-hot-toast";
 import SearchInput from "../Form/SearchInput";
 import useCategory from "../../hooks/useCategory";
-
+import { useCart } from "../../context/cart";
+import { Badge } from "antd";
 //🟢 Use <Link> when you simply want to navigate without styling changes.
 //🔴 Use <NavLink> when you need to highlight the currently active page.
 //✅ <NavLink> is best for navigation bars where users need to see which page they are on.
 
 const Header = () => {
+  const [cart] = useCart();
   const [auth, setAuth] = useAuth();
   const categories = useCategory()
   const handleLogout = () => {
@@ -126,9 +128,11 @@ const Header = () => {
                 </>
               )}
               <li className="nav-item">
+                <Badge count={cart?.length} showZero>
                 <NavLink to="/cart" className="nav-link">
-                  Cart(0)
+                  Cart{cart?.length}
                 </NavLink>
+                </Badge>
               </li>
             </ul>
           </div>
