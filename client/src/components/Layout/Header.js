@@ -1,30 +1,30 @@
-import React, { use } from "react";
+import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import { GiShoppingBag } from "react-icons/gi";
+import { FaShoppingCart } from "react-icons/fa";
 import toast from "react-hot-toast";
 import SearchInput from "../Form/SearchInput";
 import useCategory from "../../hooks/useCategory";
 import { useCart } from "../../context/cart";
 import { Badge } from "antd";
-//🟢 Use <Link> when you simply want to navigate without styling changes.
-//🔴 Use <NavLink> when you need to highlight the currently active page.
-//✅ <NavLink> is best for navigation bars where users need to see which page they are on.
+import "./Header.css"; // 🟦 Custom CSS for underline
 
 const Header = () => {
   const [cart] = useCart();
   const [auth, setAuth] = useAuth();
-  const categories = useCategory()
+  const categories = useCategory();
+
   const handleLogout = () => {
     setAuth({
-      // once you loged out then user ki info remove karo from global auth context
       ...auth,
       user: null,
       token: "",
     });
-    localStorage.removeItem("auth"); // remove the data from local storage also
+    localStorage.removeItem("auth");
     toast.success("Logout Successfully");
   };
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -44,19 +44,25 @@ const Header = () => {
             <Link to="/" className="navbar-brand">
               <GiShoppingBag /> Blisscart Bazaar
             </Link>
-            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
               <SearchInput />
+
               <li className="nav-item">
-                <NavLink to="/" className="nav-link ">
+                <NavLink
+                  to="/"
+                  className="nav-link nav-underline"
+                  style={{ textDecoration: "none" }}
+                >
                   Home
                 </NavLink>
               </li>
 
               <li className="nav-item dropdown">
                 <Link
-                  className="nav-link dropdown-toggle"
+                  className="nav-link dropdown-toggle nav-underline"
                   to={"/categories"}
                   data-bs-toggle="dropdown"
+                  style={{ textDecoration: "none" }}
                 >
                   Categories
                 </Link>
@@ -78,15 +84,24 @@ const Header = () => {
                   ))}
                 </ul>
               </li>
-              {!auth.user ? ( // if user nahi login hai toh register/login button navbar(header) mai dikhenge, otherwise logout button dikhega
+
+              {!auth.user ? (
                 <>
                   <li className="nav-item">
-                    <NavLink to="/register" className="nav-link">
+                    <NavLink
+                      to="/register"
+                      className="nav-link nav-underline"
+                      style={{ textDecoration: "none" }}
+                    >
                       Register
                     </NavLink>
                   </li>
                   <li className="nav-item">
-                    <NavLink to="/login" className="nav-link">
+                    <NavLink
+                      to="/login"
+                      className="nav-link nav-underline"
+                      style={{ textDecoration: "none" }}
+                    >
                       Login
                     </NavLink>
                   </li>
@@ -94,15 +109,15 @@ const Header = () => {
               ) : (
                 <>
                   <li className="nav-item dropdown">
-                    <NavLink
+                    <span
                       className="nav-link dropdown-toggle"
-                      href="#"
                       role="button"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
+                      style={{ cursor: "pointer" }}
                     >
                       {auth?.user?.name}
-                    </NavLink>
+                    </span>
                     <ul className="dropdown-menu">
                       <li>
                         <NavLink
@@ -127,12 +142,26 @@ const Header = () => {
                   </li>
                 </>
               )}
+
               <li className="nav-item">
-                <Badge count={cart?.length} showZero>
-                <NavLink to="/cart" className="nav-link">
-                  Cart{cart?.length}
+                <NavLink
+                  to="/cart"
+                  className="nav-link nav-underline"
+                  style={{ textDecoration: "none" }}
+                >
+                  <Badge
+                    count={cart?.length}
+                    showZero
+                    offset={[5, -5]} // 🔴 Move badge to top-right
+                    style={{
+                      backgroundColor: "#dc3545",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    <FaShoppingCart style={{ fontSize: "18px" }} />
+                  </Badge>{" "}
+                  Cart
                 </NavLink>
-                </Badge>
               </li>
             </ul>
           </div>

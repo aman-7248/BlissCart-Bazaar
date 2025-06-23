@@ -9,7 +9,7 @@ import axios from "axios";
 const Profile = () => {
   // context
   const [auth, setAuth] = useAuth();
-
+  //states
   const [name, setName] = useState(""); // first vala getter,second vala setter (name mai value ayega, jo setname se set karenge)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

@@ -62,13 +62,13 @@ const CartPage = () => {
                     className="card-img-top"
                     alt={p.name}
                     width="100px"
-                    height="100px"
+                    height="200px"
                   />
                 </div>
                 <div className="col-md-8">
                   <p className="card-title">{p.name}</p>
                   <p className="card-text">{p.description.substring(0, 30)}</p>
-                  <p>Price: {p.price}</p>
+                  <p>Price: ${p.price}</p>
                   <button
                     className="btn btn-danger"
                     onClick={() => removeCartItem(p._id)}
@@ -79,7 +79,7 @@ const CartPage = () => {
               </div>
             ))}
           </div>
-          <div className="col-md-4">
+          <div className="col-md-4 text-center" >
             <h2>Cart Summary</h2>
             <p>Total | Checkout | Payment</p>
             <hr />
@@ -87,7 +87,7 @@ const CartPage = () => {
             {auth?.user?.address ? (
               <>
                 <div className="mb-3">
-                  <h4>Current Address</h4>
+                  <h5>Current Address :</h5>
                   <h5>{auth?.user?.address}</h5>
                   <button
                     className="btn btn-outline-warning"
@@ -101,14 +101,14 @@ const CartPage = () => {
               <div className="mb-3"> 
                 {auth?.token ? (
                   <button
-                    className="btn btn-outine-warning"
+                    className="btn btn-outline-warning"
                     onClick={() => navigate("/dashboard/user/profile")}
                   >
                     Update Address
                   </button>
                 ) : (
                   <button
-                    className="btn btn-outine-warning"
+                    className="btn btn-outline-warning"
                     onClick={() => navigate("/login",{
                       state: "/cart",
                     })}

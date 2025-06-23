@@ -1,0 +1,17 @@
+/* Header.css */
+
+.nav-underline {
+  position: relative;
+  text-decoration: none !important;
+  color: inherit;
+}
+
+.nav-underline.active::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #0d6efd; /* Bootstrap blue */
+}

@@ -6,7 +6,8 @@ const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
-
+  
+  //checking in local storage ki cart items hai ki nahi
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
     if (storedCart) {
