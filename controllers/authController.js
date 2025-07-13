@@ -1,5 +1,8 @@
 import { hashPassword, comparePassword } from "../helpers/authHelper.js";
 import userModel from "../models/userModel.js";
+import orderModel from "../models/orderModel.js"
+
+
 import JWT from "jsonwebtoken";
 //controllers functions me jo bhi function help kar rahe hai woh helper folder me likhe hai
 export const registerController = async (req, res) => {
@@ -218,6 +221,50 @@ export const updateProfileController = async (req, res) => {
       success: false,
       message: 'Error while updating the profile',
       error
+    });
+  }
+};
+
+
+
+
+
+//orders
+export const getOrdersController = async (req, res) => {
+  try {
+    const orders = await orderModel
+      .find({buyer:req.user._id})
+      .populate("products", "-photo")
+      .populate("buyer", "name")
+      .sort({ createdAt:-1 });
+    res.json(orders);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error While Geting Orders",
+      error,
+    });
+  }
+};
+
+//order status
+export const orderStatusController = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const { status } = req.body;
+    const orders = await orderModel.findByIdAndUpdate(
+      orderId,
+      { status },
+      { new: true }
+    );
+    res.json(orders);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error While Updateing Order",
+      error,
     });
   }
 };
