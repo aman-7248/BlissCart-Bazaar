@@ -51,7 +51,7 @@ const Header = () => {
                 <NavLink
                   to="/"
                   className="nav-link nav-underline"
-                  style={{ textDecoration: "none" }}
+                  style={{ textDecoration: "none" ,marginLeft:"90px"}}
                 >
                   Home
                 </NavLink>

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/cart";
 import toast from "react-hot-toast";
 
+
 const HomePage = () => {
   const navigate = useNavigate()
   const [cart, setCart] = useCart();
@@ -119,6 +120,15 @@ const HomePage = () => {
       keywords="online shopping, ecommerce, fashion, electronics, home essentials, best deals"
       author="BlissCart Team"
     >
+       {/* banner image */}
+     <img
+        style={{ width: "100%", height: "300px", }}
+        src="/images/banner1.png"
+        className="banner-img"
+        alt="bannerimage"
+      />
+
+      {/* banner image */}
       <div className="row mt-3 ms-1">
         <div className="col-md-3 mt-3" style={{ width: "20.8333%" }}>
           <h4 className="text-center">Filter by Category</h4>
