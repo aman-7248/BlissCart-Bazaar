@@ -7,6 +7,7 @@ import authRoutes from "./routes/authRoute.js";
 import categoryRoutes from './routes/categoryRoutes.js';
 import productRoutes from './routes/productRoutes.js' 
 import cors from "cors";
+import path from "path";
 
 //jab require use karte toh file ka extension nahi dete the but ab es6 me file ka extension bhi dena padta hai
 //configure env
@@ -23,6 +24,13 @@ app.use(cors());  // we use to intigrate frontend and backend ports(becuase back
 app.use(express.json()); //to send and receive data in json format
 app.use(morgan("dev")); //console me print karne ke liye jab bhi req ya response ho
 
+app.use(express.static(path.join(__dirname, "client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build", "index.html"));
+});
+
+
 //routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category",categoryRoutes);
@@ -31,6 +39,10 @@ app.use('/api/v1/product',productRoutes)
 // (like /api/v1/auth/login, /api/v1/auth/register) ko authRoutes handle karega.
 
 const PORT = process.env.PORT || 8080;
+
+
+
+
 app.get("/", (req, res) => {
   res.send("<h1>Welcome to BlissCart Bazaar</h1>");
 });
