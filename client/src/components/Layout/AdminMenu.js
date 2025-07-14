@@ -29,7 +29,7 @@ const AdminMenu = () => {
             to="/dashboard/admin/orders"
             className="list-group-item list-group-item-action"
           >
-            Orders
+            User Orders Status
           </NavLink>
         </div>
       </div>
