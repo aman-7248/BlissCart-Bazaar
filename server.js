@@ -1,3 +1,4 @@
+// ES Module imports
 import express from "express";
 import colors from "colors";
 import dotenv from "dotenv";
@@ -5,48 +6,51 @@ import morgan from "morgan";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoute.js";
 import categoryRoutes from './routes/categoryRoutes.js';
-import productRoutes from './routes/productRoutes.js' 
+import productRoutes from './routes/productRoutes.js';
 import cors from "cors";
 import path from "path";
+import { fileURLToPath } from "url";   // ✅ CHANGE #1: ES module me __dirname banane ke liye
 
-//jab require use karte toh file ka extension nahi dete the but ab es6 me file ka extension bhi dena padta hai
-//configure env
-dotenv.config(); // we give path where .env file is located since in our case it is in root directory no need to give
-// syntax ->  dotenv.config({path:'\ff'});
+// ✅ CHANGE #2: __filename aur __dirname ko define karo (kyunki ES modules me nahi milte)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// configure env
+dotenv.config(); // loads environment variables from .env file (default: root directory)
+
+// connect DB
 connectDB();
 
-//rest object
+// create express app
 const app = express();
 
-//middlewares
-app.use(cors());  // we use to intigrate frontend and backend ports(becuase backend-8080, frontend-3000)
-                  //so that no error occurs
-app.use(express.json()); //to send and receive data in json format
-app.use(morgan("dev")); //console me print karne ke liye jab bhi req ya response ho
+// middlewares
+app.use(cors());  // allow cross-origin requests (frontend & backend alag ports pe hain)
+app.use(express.json()); // parse incoming JSON
+app.use(morgan("dev"));  // log incoming requests in console
 
+// serve React frontend static files
 app.use(express.static(path.join(__dirname, "client/build")));
 
+//  React Router ke liye: unknown routes pe index.html serve karo
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client/build", "index.html"));
 });
 
-
-//routes
+// backend APIs
 app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/category",categoryRoutes);
-app.use('/api/v1/product',productRoutes)
-// Iska matlab hai /api/v1/auth se start hone wale saare requests
-// (like /api/v1/auth/login, /api/v1/auth/register) ko authRoutes handle karega.
+app.use("/api/v1/category", categoryRoutes);
+app.use("/api/v1/product", productRoutes);
+// above means: /api/v1/auth/* => handled by authRoutes etc.
 
 const PORT = process.env.PORT || 8080;
 
-
-
-
+// optional welcome route
 app.get("/", (req, res) => {
   res.send("<h1>Welcome to BlissCart Bazaar</h1>");
 });
 
+// start server
 app.listen(PORT, () => {
   console.log(
     `Server listening on ${process.env.DEV_MODE} -- PORT ${PORT}`.yellow
