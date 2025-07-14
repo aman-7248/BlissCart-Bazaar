@@ -29,13 +29,6 @@ app.use(cors());  // allow cross-origin requests (frontend & backend alag ports 
 app.use(express.json()); // parse incoming JSON
 app.use(morgan("dev"));  // log incoming requests in console
 
-// serve React frontend static files
-app.use(express.static(path.join(__dirname, "client/build")));
-
-//  React Router ke liye: unknown routes pe index.html serve karo
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/build", "index.html"));
-});
 
 // backend APIs
 app.use("/api/v1/auth", authRoutes);
@@ -45,10 +38,20 @@ app.use("/api/v1/product", productRoutes);
 
 const PORT = process.env.PORT || 8080;
 
-// optional welcome route
-app.get("/", (req, res) => {
-  res.send("<h1>Welcome to BlissCart Bazaar</h1>");
+
+// serve React frontend static files
+app.use(express.static(path.join(__dirname, "client/build")));
+
+//  React Router ke liye: unknown routes pe index.html serve karo
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build", "index.html"));
 });
+
+
+// optional welcome route
+// app.get("/", (req, res) => {
+//   res.send("<h1>Welcome to BlissCart Bazaar</h1>");
+// });
 
 // start server
 app.listen(PORT, () => {
