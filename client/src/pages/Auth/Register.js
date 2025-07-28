@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import toast from 'react-hot-toast';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "./../../../node_modules/axios/lib/axios";
 import "../../styles/AuthStyles.css";
+
 
 const Register = () => {
   // user jo bhi values register form mai fill karega sabse pahle unko hold karana padega, then usko server pe bhejenge
@@ -50,9 +51,14 @@ const Register = () => {
 
   return (
    <Layout title="Register | BlissCartBazaar">
-         <div className="form-container" style={{ minHeight: "90vh" }}>
-           <form onSubmit={handleSubmit}>  {/*jaise hi hum submit karenge handleSubmit function call hoga*/}
-             <h4 className="title">REGISTER FORM</h4>
+         <div className="form-container d-flex align-items-center justify-content-center" 
+         style={{ minHeight: "90vh" }}>
+           <form onSubmit={handleSubmit} className="shadow p-4 bg-light rounded-100 w-100" style={{ maxWidth: "450px" }}>  {/*jaise hi hum submit karenge handleSubmit function call hoga*/}
+              <h4 className="text-center mb-4 py-2 text-dark fw-bold border-bottom border-2 border-danger" 
+          style={{ fontSize: '2rem', letterSpacing: '1px' }}>
+              REGISTER
+          </h4>
+
              <div className="mb-3">
             <input
               type="text"
@@ -68,10 +74,7 @@ const Register = () => {
           <div className="mb-3">
             <input
               type="email"
-              //we have added two values ie. value and on change
-              //value=email and email changes by usestate(setter function) setemail 
               value={email}
-              //on change ->> me humko event milta hai and event ki help se hum value change karte hai
               onChange={(e) => setEmail(e.target.value)}
               className="form-control"
               id="exampleInputEmail1"
@@ -119,13 +122,16 @@ const Register = () => {
               onChange={(e) => setAnswer(e.target.value)}
               className="form-control"
               id="exampleInputEmail1"
-              placeholder=" What is Your favourite book"
+              placeholder="What is Your favourite book"
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary w-100">
             REGISTER
           </button>
+          <div className="mt-3 text-center">
+            <span>Already have an account? <Link to="/login">Sign In</Link></span>
+          </div>
         </form>
       </div>
     </Layout>

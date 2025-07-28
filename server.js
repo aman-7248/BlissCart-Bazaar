@@ -39,13 +39,16 @@ app.use("/api/v1/product", productRoutes);
 const PORT = process.env.PORT || 8080;
 
 
+if(process.env.DEV_MODE!=="Devolpment Mode"){
 // serve React frontend static files
-app.use(express.static(path.join(__dirname, "client/build")));
+      app.use(express.static(path.join(__dirname, "client/build")));
 
 //  React Router ke liye: unknown routes pe index.html serve karo
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/build", "index.html"));
-});
+      app.get("*", (req, res) => {
+          res.sendFile(path.join(__dirname, "client/build", "index.html"));
+      });
+
+}
 
 
 // optional welcome route

@@ -4,14 +4,12 @@ import { useAuth } from "../context/auth";
 import axios from "axios";
 import { Checkbox, Radio } from 'antd';
 import { Prices } from "../components/Prices";
-import { BiAlignRight } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/cart";
 import toast from "react-hot-toast";
 
-
 const HomePage = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [cart, setCart] = useCart();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -21,7 +19,6 @@ const HomePage = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  //get product count from backend for pagination
   const getTotal = async () => {
     try {
       const { data } = await axios.get("/api/v1/product/product-count");
@@ -31,7 +28,6 @@ const HomePage = () => {
     }
   };
 
-  //get all cat
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get("/api/v1/category/get-category");
@@ -42,8 +38,6 @@ const HomePage = () => {
       console.log(error);
     }
   };
-
-
 
   const getAllProducts = async () => {
     try {
@@ -56,20 +50,7 @@ const HomePage = () => {
       console.log(error);
     }
   };
-  useEffect(() => {
-    getAllCategory();
-    getAllProducts();
-    getTotal();
-  }, []);
 
-
-  useEffect(() => {
-    if (page == 1) return;
-    loadMore()
-  }, [page]);
-
-
-  //load more
   const loadMore = async () => {
     try {
       setLoading(true);
@@ -82,7 +63,17 @@ const HomePage = () => {
     }
   };
 
-  // filter by cat
+  useEffect(() => {
+    getAllCategory();
+    getAllProducts();
+    getTotal();
+  }, []);
+
+  useEffect(() => {
+    if (page === 1) return;
+    loadMore();
+  }, [page]);
+
   const handleFilter = (value, id) => {
     let all = [...checked];
     if (value) {
@@ -92,6 +83,7 @@ const HomePage = () => {
     }
     setChecked(all);
   };
+
   useEffect(() => {
     if (!checked.length || !radio.length) getAllProducts();
   }, [checked.length, radio.length]);
@@ -100,7 +92,6 @@ const HomePage = () => {
     if (checked.length || radio.length) filterProduct();
   }, [checked, radio]);
 
-  //get filterd product
   const filterProduct = async () => {
     try {
       const { data } = await axios.post("/api/v1/product/product-filters", {
@@ -116,48 +107,54 @@ const HomePage = () => {
   return (
     <Layout
       title="BlissCart Bazaar - Your One-Stop Online Shop"
-      description="Welcome to BlissCart Bazaar — the best place to shop for fashion, electronics, and home essentials at unbeatable prices. Fast delivery, secure payments, and amazing deals!"
-      keywords="online shopping, ecommerce, fashion, electronics, home essentials, best deals"
+      description="Shop fashion, electronics & more at unbeatable prices."
+      keywords="online shopping, ecommerce, fashion, electronics, home"
       author="BlissCart Team"
     >
-       {/* banner image */}
-     <img
-        style={{ width: "100%", height: "300px", }}
+      {/* Banner */}
+      <img
+        style={{ width: "100%", height: "300px" }}
         src="/images/banner1.png"
         className="banner-img"
-        alt="bannerimage"
+        alt="banner"
       />
 
-      {/* banner image */}
-      <div className="row mt-3 ms-1">
-        <div className="col-md-3 mt-3" style={{ width: "20.8333%" }}>
-          <h4 className="text-center">Filter by Category</h4>
-          <div className="d-flex flex-column">
-            {categories?.map((c) => (
-              <Checkbox
-                key={c._id}
-                onChange={(e) => handleFilter(e.target.checked, c._id)}
-              >
-                {c.name}
-              </Checkbox>
-            ))}
-          </div>
-
-
-          {/* price filter */}
-          <h4 className="text-center mt-4">Filter By Price</h4>
-          <div className="d-flex flex-column">
-            <Radio.Group onChange={(e) => setRadio(e.target.value)}>
-              {Prices?.map((p) => (
-                <div key={p._id}>
-                  <Radio value={p.array}>{p.name}</Radio>
-                </div>
+      <div className="row mt-3 ms-1 me-2">
+        {/* Sidebar */}
+        <div className="col-md-3 mt-3">
+          <div className="p-3 shadow rounded bg-light">
+            <h4 className="text-center mb-4 py-2 text-dark fw-bold border-bottom border-2 border-primary" 
+          style={{ fontSize: '1.2rem', letterSpacing: '1px' }}>
+                🛍️ Filter by Category
+          </h4>
+            <div className="d-flex flex-column">
+              {categories?.map((c) => (
+                <Checkbox
+                  key={c._id}
+                  onChange={(e) => handleFilter(e.target.checked, c._id)}
+                  className="mb-2"
+                >
+                  {c.name}
+                </Checkbox>
               ))}
-            </Radio.Group>
-          </div>
-          <div className="d-flex flex-column mt-2">
+            </div>
+
+             <h4 className="text-center mb-4 py-2 text-dark fw-bold border-bottom border-2 border-primary" 
+          style={{ fontSize: '1.2rem', letterSpacing: '1px' }}>
+                🛍️ Filter by Price
+          </h4>
+            <div className="d-flex flex-column">
+              <Radio.Group onChange={(e) => setRadio(e.target.value)}>
+                {Prices?.map((p) => (
+                  <div key={p._id} className="mb-2">
+                    <Radio value={p.array}>{p.name}</Radio>
+                  </div>
+                ))}
+              </Radio.Group>
+            </div>
+
             <button
-              className="btn btn-danger"
+              className="btn btn-danger mt-4"
               onClick={() => window.location.reload()}
             >
               RESET FILTERS
@@ -165,47 +162,79 @@ const HomePage = () => {
           </div>
         </div>
 
+        {/* Products Section */}
+        <div className="col-md-9 mr-3">
+          <h2 className="text-center mb-4 py-2 text-dark fw-bold border-bottom border-2 border-primary" 
+          style={{ fontSize: '2rem', letterSpacing: '1px' }}>
+                🛍️ All Products
+          </h2>
 
-
-
-        <div className="col-md-9 " style={{marginLeft : "10px"}}>
-          <h1 className="text-center">All Products</h1>
-          <div className="d-flex flex-wrap">
+          <div className="row">
             {products?.map((p) => (
-              <div className="card m-2" style={{ width: "18rem" }}>
-                <img
-                  src={`/api/v1/product/product-photo/${p._id}`}
-                  className="card-img-top"
-                  alt={p.name}
-                />
-                <div className="card-body">
-                  <h5 className="card-title">{p.name}</h5>
-                  <p className="card-text">
-                    {p.description.substring(0, 30)}...
-                  </p>
-                  <p className="card-text"> $ {p.price}</p>
-                  <button class="btn btn-primary ms-1 " onClick={() => navigate(`/product/${p.slug}`)}>More Details</button>
-                  <button class="btn btn-secondary ms-1 "
-                  onClick={() => {
-                    setCart([...cart, p]);
-                    localStorage.setItem("cart", JSON.stringify([...cart, p]));
-                    toast.success("Item Added to cart");
-                  }}
-                   >ADD TO CART</button>
+              <div key={p._id} className="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div className="card h-100 shadow-sm rounded-4">
+                  <img
+                    src={`/api/v1/product/product-photo/${p._id}`}
+                    className="card-img-top"
+                    alt={p.name}
+                    style={{
+                      height: "300px",
+                   
+                      borderTopLeftRadius: "16px",
+                      borderTopRightRadius: "16px"
+                    }}
+                  />
+                  <div
+                    className="card-body d-flex flex-column justify-content-between"
+                    style={{
+                      background: "linear-gradient(0deg, #ffdee9 0%, #b5fffc 100%)",
+                      borderBottomLeftRadius: "16px",
+                      borderBottomRightRadius: "16px"
+                    }}
+                  >
+                    <div>
+                      <h5 className="card-title text-danger fw-bold">{p.name}</h5>
+                      <p className="card-text text-dark">{p.description.substring(0, 60)}...</p>
+                      <p className="card-text text-success fw-bold fs-5">
+                        ₹ {p.price}
+                      </p>
+                      <p></p>
+                    </div>
+                    <div className="mt-auto">
+                       <button
+                        className="btn btn-primary mb-2 w-100"
+                        onClick={() => navigate(`/product/${p.slug}`)}
+                      >
+                        More Details
+                      </button>
+                      <button
+                        className="btn btn-success w-100"
+                        onClick={() => {
+                          setCart([...cart, p]);
+                          localStorage.setItem("cart", JSON.stringify([...cart, p]));
+                          toast.success("Item Added to cart");
+                        }}
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="m-2 p-3" style={{ display: "flex", justifyContent: "flex-end" }}>
+          {/* Load More */}
+          <div className="m-3 d-flex justify-content-center">
             {products && products.length < total && (
-              <button className="btn btn-warning"
+              <button
+                className="btn btn-warning"
                 onClick={(e) => {
                   e.preventDefault();
                   setPage(page + 1);
                 }}
               >
-                {loading ? "loading..." : "Loadmore"}
+                {loading ? "Loading..." : "Load More"}
               </button>
             )}
           </div>

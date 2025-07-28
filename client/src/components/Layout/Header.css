@@ -1,17 +1,29 @@
 /* Header.css */
 
+/* Remove Bootstrap caret from dropdown-toggle */
+.nav-link.nav-underline.dropdown-toggle::after {
+  display: none !important;
+}
+
+/* Underline animation */
 .nav-underline {
   position: relative;
-  text-decoration: none !important;
+  text-decoration: none;
   color: inherit;
 }
 
-.nav-underline.active::after {
+.nav-underline::after {
   content: "";
   position: absolute;
-  bottom: -3px;
+  bottom: 0;
   left: 0;
-  height: 2px;
   width: 100%;
-  background-color: #0d6efd; /* Bootstrap blue */
+  height: 2px;
+  background-color: #000;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.nav-underline:hover::after {
+  transform: scaleX(1);
 }

@@ -1,63 +1,79 @@
-/* ===================================
-========= register page  */
 .form-container {
-  margin-top: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 70vh;
-  flex-direction: column;
-  background-color: #ffdee9;
-  background-image: linear-gradient(0deg, #ffdee9 0%, #b5fffc 100%);
+  padding: 3rem 1rem;
+  min-height: 100vh;
+  background: linear-gradient(0deg, #ffdee9 0%, #b5fffc 100%);
+ 
+
+}
+.form-container {
+  background: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
 }
 
 .form-container form {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  padding: 20px;
   background-color: #fff;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 450px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .form-container form .title {
   text-align: center;
-  margin-bottom: 15px;
-  font-weight: bold;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: 700;
   font-family: "Playfair Display", serif;
+  color: #333;
 }
 
 .form-container form input {
-  border: none;
-  border-bottom: 1px solid #000;
-  border-radius: 0;
+  width: 100%;
+  padding: 0.7rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-container form input:focus {
+  outline: none;
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
 }
 
 .form-container form button {
-  border: 1px solid black;
-  border-radius: 0;
-  background-color: #000;
+  background: #000;
   color: white;
-  width: 250px;
+  border: none;
+  padding: 0.75rem;
+  font-size: 1rem;
+  width: 100%;
+  border-radius: 6px;
+  transition: background 0.3s;
 }
 
 .form-container form button:hover {
-  border: 1px solid black;
-  background: #000000; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #434343,
-    #000000
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #434343,
-    #000000
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, #434343, #000000);
 }
 
 .forgot-btn {
   background-color: #434343a4 !important;
-  border: 0 !important;
+  border: none !important;
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: white;
+  transition: background 0.3s;
 }
 
 .forgot-btn:hover {
-  color: white !important;
+  background-color: #000 !important;
+  color: #fff !important;
 }

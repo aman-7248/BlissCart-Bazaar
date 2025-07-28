@@ -1,0 +1,150 @@
+.banner-img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+
+.filter-panel {
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+}
+
+.filter-panel h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.filter-panel .ant-checkbox-wrapper,
+.filter-panel .ant-radio-wrapper {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #444;
+}
+
+.filter-panel .btn-danger {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.6rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: background-color 0.3s;
+}
+
+.filter-panel .btn-danger:hover {
+  background-color: #c82333;
+}
+
+.product-section h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 1.5rem 0;
+  color: #222;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
+  gap: 1.5rem;
+}
+
+.product-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+}
+
+.product-img-container {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.product-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+.product-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  color: #222;
+}
+
+.product-description {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 0.8rem;
+  flex-grow: 1;
+}
+
+.product-price {
+  font-size: 1.1rem;
+  color: #0d6efd;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.product-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.product-buttons .btn {
+  flex: 1;
+  padding: 0.6rem 0;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.product-buttons .btn-primary:hover {
+  background-color: #0047ab;
+}
+
+.product-buttons .btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.load-more {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.load-more .btn-warning {
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.load-more .btn-warning:hover {
+  background-color: #e0a800;
+}

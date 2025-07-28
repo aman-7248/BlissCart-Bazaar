@@ -5,37 +5,31 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "./../../../node_modules/axios/lib/axios";
 import "../../styles/AuthStyles.css";
 import { useAuth } from "../../context/auth";
+import { NavLink } from "react-router-dom";
 
 const Login = () => {
-  // user jo bhi values login form mai fill karega sabse pahle unko hold karana padega, then usko server pe bhejenge
-  // get values, store in a variable, when network request will call then pass these values to server
-  // for that we will use state(React states)
-  const [email, setEmail] = useState(""); // first vala getter,second vala setter (name mai value ayega, jo setname se set karenge)
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const [auth, setAuth] = useAuth(); // useauth is the custom hook that we have created in auth.js(context)
-
-  const navigate = useNavigate(); // for navigation from one page to other
+  const [auth, setAuth] = useAuth();
+  const navigate = useNavigate();
   const location = useLocation();
 
-  // submit karne pe jo data frontend se aa raha hai usko server(backend)mai bhejne k liye "axios" ka use karenge
   const handleSubmit = async (e) => {
-    e.preventDefault(); // on submit prevent default behaviour of page refresh by javascript
+    e.preventDefault();
     try {
       const res = await axios.post(`/api/v1/auth/login`, {
         email,
         password,
       });
       if (res && res.data.success) {
-        toast.success(res.data && res.data.message);
+        toast.success(res.data.message);
         setAuth({
-          // jitna bhi auth data us user se related hoga voh sab set ho jayega so that context ki help se koi bhi use kar sake(isilye auth data store karna jaruri hai)
           ...auth,
           user: res.data.user,
           token: res.data.token,
         });
-        localStorage.setItem("auth", JSON.stringify(res.data)); // store data in local storage
-        navigate(location.state || "/"); // when successfully logged in navigate to home page
+        localStorage.setItem("auth", JSON.stringify(res.data));
+        navigate(location.state || "/");
       } else {
         toast.error(res.data.message);
       }
@@ -47,44 +41,55 @@ const Login = () => {
 
   return (
     <Layout title="Login | BlissCartBazaar">
-      <div className="form-container" style={{ minHeight: "90vh" }}>
-        <form onSubmit={handleSubmit}>
-          <h4 className="title">LOGIN FORM</h4>
+      <div className="form-container d-flex align-items-center justify-content-center">
+        <form onSubmit={handleSubmit} className="shadow p-5 bg-light rounded-100 form-box" >
+
+        <h4 className="text-center mb-4 py-2 text-dark fw-bold border-bottom border-2 border-danger" 
+          style={{ fontSize: '2rem', letterSpacing: '1px' }}>
+              LOGIN
+          </h4>
+
           <div className="mb-3">
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="form-control"
-              id="exampleInputEmail1"
               placeholder="Enter Your Email"
               required
             />
           </div>
+
           <div className="mb-3">
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="form-control"
-              id="exampleInputPassword1"
               placeholder="Enter Your Password"
               required
             />
           </div>
-          <div className="mb-3">
+           
+          <div className="mb-3 text-end">
             <button
               type="button"
-              className="btn btn-secondary"
+              className="btn btn-outline-secondary btn-sm"
               onClick={() => navigate(`/forgot-password`)}
             >
-              FORGOT PASSWORD
+              Forgot Password?
             </button>
           </div>
 
-          <button type="submit" className="btn btn-primary">
-            LOGIN
+          <button type="submit" className="btn btn-primary w-100">
+            Login
           </button>
+
+          <div className="text-center mt-3">
+            <NavLink to="/register" className="text-decoration-none text-secondary">
+              Don't have an account? <span className="text-primary fw-semibold">Register</span>
+            </NavLink>
+          </div>
         </form>
       </div>
     </Layout>
