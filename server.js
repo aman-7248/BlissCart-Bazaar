@@ -39,7 +39,7 @@ app.use("/api/v1/product", productRoutes);
 const PORT = process.env.PORT || 8080;
 
 
-if(process.env.DEV_MODE!=="Devolpment Mode"){
+//if(process.env.DEV_MODE!=="Devolpment Mode"){
 // serve React frontend static files
       app.use(express.static(path.join(__dirname, "client/build")));
 
@@ -48,7 +48,7 @@ if(process.env.DEV_MODE!=="Devolpment Mode"){
           res.sendFile(path.join(__dirname, "client/build", "index.html"));
       });
 
-}
+//}
 
 
 // optional welcome route
