@@ -7,7 +7,11 @@ import {
   getOrdersController,
   getAllOrdersController,
   orderStatusController,
+  sendOtpController,
+  verifyOtpController,
 } from "../controllers/authController.js";
+
+
 import { requireSignIn, isAdmin } from "../middlewares/authMiddleware.js";
 import { updateProfileController } from "../controllers/authController.js";
 
@@ -17,6 +21,10 @@ const router = express.Router();
 //actaul syntax  router.post('Url',callback function)   but hum mvc use kar rahe isliye controller alag likhe hai
 router.post("/register", registerController);
 // Jab POST request aaye /register route pe, toh registerController function run hoga
+
+router.post("/send-otp", sendOtpController);
+router.post("/verify-otp", verifyOtpController);
+
 
 router.post("/login", loginController);
 

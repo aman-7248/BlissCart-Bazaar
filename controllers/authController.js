@@ -229,7 +229,7 @@ export const updateProfileController = async (req, res) => {
 
 
 
-//orders
+//orders for user
 export const getOrdersController = async (req, res) => {
   try {
     const orders = await orderModel
@@ -248,6 +248,7 @@ export const getOrdersController = async (req, res) => {
   }
 };
 
+//for admin
 export const getAllOrdersController = async (req, res) => {
   try {
     const orders = await orderModel
@@ -284,5 +285,93 @@ export const orderStatusController = async (req, res) => {
       message: "Error While Updating Order",
       error,
     });
+  }
+};
+
+
+
+
+import dotenv from "dotenv";
+import nodemailer from "nodemailer";
+import { GiMailShirt } from "react-icons/gi";
+
+let tempUserData = {}; // Temporary store for OTP verification
+dotenv.config();
+// Step 1: Send OTP
+export const sendOtpController = async (req, res) => {
+  try {
+    const { email, name, password, phone, address, answer } = req.body;
+    if (!email) return res.send({ success: false, message: "Email is required" });
+
+    // Check if user already exists
+    const existingUser = await userModel.findOne({ email });
+    if (existingUser) {
+      return res.status(200).send({
+        success: false,
+        message: "Already Registered with this Email, kindly Login",
+      });
+    }
+
+    // Generate OTP
+    const otp = Math.floor(100000 + Math.random() * 900000);
+
+    // Store user data temporarily
+    tempUserData[email] = { name, password, phone, address, answer, otp };
+
+    // Send OTP via email
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.EMAIL_PASSWORD, // Use Gmail App Password
+      },
+    });
+
+    await transporter.sendMail({
+      from: process.env.EMAIL,
+      to: email,
+      subject: "Your OTP for Email Verification",
+      text: `Your OTP for email verification is ${otp}. It is valid for 5 minutes.`,
+    });
+
+    res.send({ success: true, message: "OTP sent to your email" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ success: false, message: "Error sending OTP", error });
+  }
+};
+
+// Step 2: Verify OTP & Register User
+export const verifyOtpController = async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+    if (!email || !otp) return res.send({ success: false, message: "Email and OTP required" });
+
+    if (tempUserData[email] && tempUserData[email].otp == otp) {
+      const { name, password, phone, address, answer } = tempUserData[email];
+      const hashedPassword = await hashPassword(password);
+
+      const user = await new userModel({
+        name,
+        email,
+        phone,
+        address,
+        answer,
+        password: hashedPassword,
+      }).save();
+
+      delete tempUserData[email]; // Clear temp data
+
+      res.status(201).send({
+        success: true,
+        message: "Email verified and user registered successfully",
+        user,
+      });
+    } else {
+      res.send({ success: false, message: "Invalid OTP" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ success: false, message: "Error verifying OTP", error });
   }
 };
