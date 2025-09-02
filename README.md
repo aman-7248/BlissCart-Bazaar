@@ -17,7 +17,7 @@ _A modern and user-friendly e-commerce web application built with the MERN stack
 ✅ **Order Management** – Place and manage orders easily  
 ✅ **Search & Filter** – Find products by category and price  
 ✅ **Responsive UI** – Optimized for desktop and mobile  
-✅ **Admin Controls** – Manage users, products, and orders 
+✅ **Admin Controls** – Manage users, products, and orders  
 ✅ **Payment Gateway** – Successful Payment gateway integration   
 
 ---
