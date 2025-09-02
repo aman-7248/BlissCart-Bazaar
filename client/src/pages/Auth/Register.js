@@ -60,7 +60,7 @@ const Register = () => {
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" required className="form-control mb-3" />
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required className="form-control mb-3" />
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required className="form-control mb-3" />
-            <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone" required className="form-control mb-3" />
+            <input type="number" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone" required className="form-control mb-3" />
             <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Address" required className="form-control mb-3" />
             <input type="text" value={answer} onChange={(e) => setAnswer(e.target.value)} placeholder="Favorite Book" required className="form-control mb-3" />
             <button type="submit" className="btn btn-primary w-100">Send OTP</button>
