@@ -22,7 +22,7 @@ const userSchema=new mongoose.Schema({
         // select: false ---> Excludes password from queries by default
     },
     phone:{
-        type:Number,
+        type:String,
         required:true
     },
     address:{
